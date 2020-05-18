@@ -72,7 +72,7 @@ module.exports = {
             template: path.join(PATH_SOURCE, './index.html')
         }),
 
-        // This plugin will delete all files inside `output.path` (the dist directory),
+        // This plugin will delete all files inside `output.path` (the dest directory),
         // but the directory itself will be kept.
         new CleanWebpackPlugin()
     ],
