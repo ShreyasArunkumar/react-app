@@ -1,12 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
 
 
 const PATH_SOURCE = path.join(__dirname, '../../src');
 const PATH_DEST = path.join(__dirname, '../../dest');
 
-module.exports = {
+module.exports = smp.wrap({
     mode: 'development',
 
     devServer: {
@@ -40,12 +43,14 @@ module.exports = {
         filename: 'js/[name].[hash].js' // keep it dynamic so it will be useful for caching
     },
 
+    devtool: 'eval-source-map',
+
     module: {
         rules: [
             {
                 test: /\.js$/, // Apply this rule to files ending in .js
                 exclude: /node_modules/, // Don't apply to files residing in node_modules
-                use: {
+                use: ['cache-loader', {
                     loader: 'babel-loader', 
                     options: {
                         presets: [
@@ -60,7 +65,7 @@ module.exports = {
                             }], '@babel/preset-react'
                         ]
                     }
-                }
+                }] 
             }
         ]
     },
@@ -76,4 +81,4 @@ module.exports = {
         // but the directory itself will be kept.
         new CleanWebpackPlugin()
     ],
-}
+});
