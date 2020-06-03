@@ -25,7 +25,7 @@ module.exports = {
         // '@typescript-eslint'
     ],
     'rules': {
-        'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx', '.tsx'] }]
-        'import/no-extraneous-dependencies': [1, { 'extensions': ['.js', '.jsx', '.tsx'] }]
+        'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx', '.tsx'] }],
+        'import/no-extraneous-dependencies': 'off'
     }
 };
